@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+THEME_MD="./docs/themes.md"
+
+themes=$(yartsu --list-themes | tail -n +2 | awk '{print $2}')
+
+mkdir -p ./assets/themes
+rm -f $THEME_MD
+
+echo "# Themes" >>$THEME_MD
+echo >>$THEME_MD
+for theme in $themes; do
+	url="assets/themes/${theme}.svg"
+	echo >>$THEME_MD
+	echo "## $theme" >>$THEME_MD
+	echo "![$theme](../$url)" >>$THEME_MD
+	yartsu --theme $theme -o $url -t "yartsu --theme ${theme}" -- yartsu -h
+done
+
+echo "finished."

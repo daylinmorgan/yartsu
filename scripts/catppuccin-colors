@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+	echo "Usage: catppuccin-colors <palette>"
+	echo "i.e. mocha,frappe,macchiato,latte"
+	exit 1
+fi
+
+if ! [[ -x "$(command -v inkcat)" ]]; then
+	echo "inkcat is not installed"
+	echo "you can use npm,pnpm, or yarn to install"
+	exit 1
+fi
+
+get-color() {
+	local palette=$1
+	local color=$2
+	inkcat $palette $color --no-copy --format rgb | sed s'/rgb//g'
+}
+
+declare -A colors bright_colors
+colors=(
+	[black]=$(get-color $1 subtext1)
+	[red]=$(get-color $1 red)
+	[green]=$(get-color $1 green)
+	[yellow]=$(get-color $1 yellow)
+	[blue]=$(get-color $1 blue)
+	[magenta]=$(get-color $1 pink)
+	[cyan]=$(get-color $1 teal)
+	[white]=$(get-color $1 surface2)
+)
+bright_colors=(
+	[black]=$(get-color $1 subtext0)
+	[red]=$(get-color $1 red)
+	[green]=$(get-color $1 green)
+	[yellow]=$(get-color $1 yellow)
+	[blue]=$(get-color $1 blue)
+	[magenta]=$(get-color $1 pink)
+	[cyan]=$(get-color $1 teal)
+	[white]=$(get-color $1 surface1)
+)
+
+make-palette() {
+
+	echo "cat_${1} = Theme("
+	echo "    background = $(get-color $1 base),"
+	echo "    foreground = $(get-color $1 text),"
+	echo "    colors = Colors("
+	for color in "${!colors[@]}"; do
+		echo "        $color = ${colors[$color]},"
+	done
+	echo "    ),"
+
+	echo "    bright_colors = Colors("
+	for color in "${!bright_colors[@]}"; do
+		echo "    $color = ${bright_colors[$color]},"
+	done
+	echo "    ),"
+	echo ")"
+
+	echo "CAT_${1^^} = TerminalTheme(
+        cat_${1}.background,
+        cat_${1}.foreground,
+        cat_${1}.colors,
+        cat_${1}.bright_colors,
+    )"
+
+}
+
+for palette in "$@"; do
+	make-palette $palette
+done
