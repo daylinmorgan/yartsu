@@ -8,6 +8,9 @@
 - [cat-macchiato](#cat-macchiato)
 - [cat-latte](#cat-latte)
 - [dracula](#dracula)
+- [nord](#nord)
+- [gruvbox-dark](#gruvbox-dark)
+- [gruvbox-light](#gruvbox-light)
 - [monokai](#monokai)
 - [dimmed_monokai](#dimmedmonokai)
 - [night-owlish](#night-owlish)
@@ -32,6 +35,18 @@
 
 ## dracula
 ![dracula](../assets/themes/dracula.svg)
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## nord
+![nord](../assets/themes/nord.svg)
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## gruvbox-dark
+![gruvbox-dark](../assets/themes/gruvbox-dark.svg)
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## gruvbox-light
+![gruvbox-light](../assets/themes/gruvbox-light.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## monokai
