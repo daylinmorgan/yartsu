@@ -13,6 +13,10 @@ requires-python = ">=3.7"
 license = {text = "MIT"}
 dynamic = ["version"]
 
+[project.urls]
+Homepage = "https://github.com/daylinmorgan/yartsu"
+Repository = "https://github.com/daylinmorgan/yartsu"
+
 [project.scripts]
 yartsu = "yartsu.cli:main"
 
