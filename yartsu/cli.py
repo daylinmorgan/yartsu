@@ -4,6 +4,7 @@ import textwrap
 from argparse import SUPPRESS, FileType, Namespace
 from pathlib import Path
 
+from rich.__main__ import make_test_card
 from rich.console import Console
 from rich.text import Text
 
@@ -64,6 +65,7 @@ def get_args() -> Namespace:
     parser.add_argument(
         "--list-themes", help="list available themes", action="store_true"
     )
+    parser.add_argument("--demo", help=SUPPRESS, action="store_true")
     return parser.parse_args()
 
 
@@ -76,7 +78,7 @@ def main() -> None:
         term.print("\n".join(["  - " + theme for theme in THEMES]))
         sys.exit(0)
 
-    if args.cmd and args.input or not (args.cmd or args.input):
+    if args.cmd and args.input or not (args.cmd or args.input or args.demo):
         term.print(
             "[UsageError]: either use the --input option "
             "OR pipe terminal output to yartsu",
@@ -109,12 +111,17 @@ def main() -> None:
     if args.input:
         parsed_input = Text.from_ansi(args.input.read())
 
+    elif args.demo:
+        parsed_input = make_test_card()
+
     title = args.title or cmd or "yartsu"
 
-    if not args.width:
-        console.width = max(console.measure(parsed_input).maximum, 40)
-    else:
+    if args.width:
         console.width = args.width
+    elif args.demo:
+        console.width = 120
+    else:
+        console.width = max(console.measure(parsed_input).maximum, 40)
 
     console.print(parsed_input)
 
