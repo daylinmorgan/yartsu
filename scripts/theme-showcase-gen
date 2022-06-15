@@ -4,17 +4,32 @@ THEME_MD="./docs/themes.md"
 
 themes=$(yartsu --list-themes | tail -n +2 | awk '{print $2}')
 
+newline() {
+	echo >>"$THEME_MD"
+}
+
 mkdir -p ./assets/themes
+rm -f ./assets/themes/*
 rm -f $THEME_MD
 
+echo '<div id="top"></div>' >>$THEME_MD
+newline
 echo "# Themes" >>$THEME_MD
+newline
+echo " Available themes:" >>$THEME_MD
+
+for theme in $themes; do
+	echo "- [$theme](#$(echo $theme | sed s'/_//'))" >>$THEME_MD
+done
 echo >>$THEME_MD
+
 for theme in $themes; do
 	url="assets/themes/${theme}.svg"
 	echo >>$THEME_MD
 	echo "## $theme" >>$THEME_MD
 	echo "![$theme](../$url)" >>$THEME_MD
-	yartsu --theme $theme -o $url -t "yartsu --theme ${theme}" -- yartsu -h
+	echo '<p align="right">(<a href="#top">back to top</a>)</p>' >>$THEME_MD
+	yartsu --theme $theme -o $url --demo -t "yartsu --theme ${theme} --demo"
 done
 
 echo "finished."

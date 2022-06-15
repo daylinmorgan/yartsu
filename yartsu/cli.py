@@ -15,7 +15,7 @@ from .argparse import ArgumentParser
 from .term import term
 from .themes import THEMES
 
-DEFAULT_THEME = os.getenv("YARTSU_THEME", "cat_mocha")
+DEFAULT_THEME = os.getenv("YARTSU_THEME", "cat-mocha")
 
 
 def get_args() -> Namespace:

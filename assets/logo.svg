@@ -1,37 +1,31 @@
 <svg class="rich-terminal" viewBox="0 0 580 220.79999999999998" xmlns="http://www.w3.org/2000/svg">
     <!-- Generated with Rich https://www.textualize.io -->
     <style>
-
     @font-face {
         font-family: "Fira Code";
         src: local("FiraCode-Regular"),
-                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Regular.woff2") format("woff2"),
-                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Regular.woff") format("woff");
+            url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@2.1.0/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf") format("truetype");
         font-style: normal;
         font-weight: 400;
     }
     @font-face {
         font-family: "Fira Code";
         src: local("FiraCode-Bold"),
-                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Bold.woff2") format("woff2"),
-                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Bold.woff") format("woff");
+            url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@2.1.0/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf") format("truetype");
         font-style: bold;
         font-weight: 700;
     }
-
     .terminal-470432081-matrix {
         font-family: Fira Code, monospace;
         font-size: 20px;
         line-height: 24.4px;
         font-variant-east-asian: full-width;
     }
-
     .terminal-470432081-title {
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
     }
-
     .terminal-470432081-r1 { fill: #06dc9d }
 .terminal-470432081-r2 { fill: #0de988 }
 .terminal-470432081-r3 { fill: #18f373 }
@@ -95,7 +89,6 @@
 .terminal-470432081-r61 { fill: #e10895 }
 .terminal-470432081-r62 { fill: #d203aa }
     </style>
-
     <defs>
     <clipPath id="terminal-470432081-clip-terminal">
       <rect x="0" y="0" width="560.1999999999999" height="169.79999999999998" />
@@ -119,7 +112,6 @@
     <rect x="0" y="123.5" width="561.2" height="24.65"/>
             </clipPath>
     </defs>
-
     <rect fill="#1e1e2e" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="578" height="218.8" rx="8"/><text class="terminal-470432081-title" fill="#c6d0f5" text-anchor="middle" x="289" y="27">yartsu</text>
             <g transform="translate(26,22)">
             <circle cx="0" cy="0" r="7" fill="#ff5f57"/>

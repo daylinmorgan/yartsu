@@ -42,7 +42,8 @@ bright_colors=(
 
 make-palette() {
 
-	echo "cat_${1} = Theme("
+	echo "Theme("
+	echo "    name = \"cat-$1\","
 	echo "    background = $(get-color $1 base),"
 	echo "    foreground = $(get-color $1 text),"
 	echo "    colors = Colors("
@@ -56,15 +57,7 @@ make-palette() {
 		echo "    $color = ${bright_colors[$color]},"
 	done
 	echo "    ),"
-	echo ")"
-
-	echo "CAT_${1^^} = TerminalTheme(
-        cat_${1}.background,
-        cat_${1}.foreground,
-        cat_${1}.colors,
-        cat_${1}.bright_colors,
-    )"
-
+	echo "),"
 }
 
 for palette in "$@"; do
