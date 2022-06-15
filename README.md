@@ -120,7 +120,7 @@ This should result in general support for emoji's and `nerd font` icons.
 
 - [ ] add unit tests
 - [x] add support for nerd-fonts
-- [ ] add optional shadow
+- [x] add ~~optional~~ shadow
 - [ ] add more themes
 
 

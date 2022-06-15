@@ -1,5 +1,5 @@
 CONSOLE_SVG_FORMAT = """\
-<svg class="rich-terminal" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
+<svg class="rich-terminal shadow" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
     <!-- Generated with Rich https://www.textualize.io -->
     <style>
     @font-face {{
@@ -26,6 +26,10 @@ CONSOLE_SVG_FORMAT = """\
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
+    }}
+    .shadow {{
+        -webkit-filter: drop-shadow( 5px 10px 15px rgba(0, 0, 0, .7));
+        filter: drop-shadow( 5px 10px 15px rgba(0, 0, 0, .7));
     }}
     {styles}
     </style>
