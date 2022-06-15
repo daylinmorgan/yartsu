@@ -41,7 +41,7 @@ You can also install the [`shiv`](https://github.com/linkedin/shiv) based zipapp
 
 With `cURL`:
 ```bash
-curl -o ~/bin/yartsu -fL https://github.com/daylinmorgan/yartsu/releases/download/v22.06-beta/yartsu
+curl -o ~/bin/yartsu -fL https://github.com/daylinmorgan/yartsu/releases/download/v22.06-beta1/yartsu
 chmod u+x ~/bin/yartsu
 ```
 
