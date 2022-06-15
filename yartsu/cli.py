@@ -112,7 +112,7 @@ def main() -> None:
         parsed_input = Text.from_ansi(args.input.read())
 
     elif args.demo:
-        parsed_input = make_test_card()
+        parsed_input = make_test_card()  # type: ignore
 
     title = args.title or cmd or "yartsu"
 

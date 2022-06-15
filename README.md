@@ -37,19 +37,17 @@ If you come across anything unexpected please submit an issue.
 pip install yartsu
 ```
 
-You can also install the [`shiv`](https://github.com/linkedin/shiv) based zipapp from the releases page.
+You can also download the [`shiv`](https://github.com/linkedin/shiv) based zipapp from the releases page.
 
-With `cURL`:
-```bash
-curl -o ~/bin/yartsu -fL https://github.com/daylinmorgan/yartsu/releases/download/v22.06-beta1/yartsu
-chmod u+x ~/bin/yartsu
-```
-
-With [`eget`](https://github.com/zyedidia/eget):
+Optionally with [`eget`](https://github.com/zyedidia/eget):
 
 ```bash
 eget daylinmorgan/yartsu
 ```
+
+This version will bundle depedencies and unpack them at `~/.shiv` at first runtime.
+You can change this location by setting the `SHIV_ROOT` environment variable.
+See `shiv` for more info.
 
 ## Usage
 
