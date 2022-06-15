@@ -37,7 +37,19 @@ If you come across anything unexpected please submit an issue.
 pip install yartsu
 ```
 
-<!-- install zipapp from releases?? -->
+You can also install the [`shiv`](https://github.com/linkedin/shiv) based zipapp from the releases page.
+
+With `cURL`:
+```bash
+curl -o ~/bin/yartsu -fL https://github.com/daylinmorgan/yartsu/releases/download/v22.06-beta/yartsu
+chmod u+x ~/bin/yartsu
+```
+
+With [`eget`](https://github.com/zyedidia/eget):
+
+```bash
+eget daylinmorgan/yartsu
+```
 
 ## Usage
 
