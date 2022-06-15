@@ -1,5 +1,6 @@
 from collections import namedtuple
 
+from rich.color import parse_rgb_hex
 from rich.terminal_theme import (
     DIMMED_MONOKAI,
     MONOKAI,
@@ -10,6 +11,38 @@ from rich.terminal_theme import (
 
 Colors = namedtuple("Colors", "black, red, green, yellow, blue, magenta, cyan, white")
 Theme = namedtuple("Theme", "background, foreground, colors, bright_colors")
+
+dracula = Theme(
+    background=parse_rgb_hex('282a36'),
+    foreground=parse_rgb_hex('f8f8f2'),
+    colors=Colors(
+        black=parse_rgb_hex('21222c'),
+        cyan=parse_rgb_hex('8be9fd'),
+        yellow=parse_rgb_hex('f1fa8c'),
+        blue=parse_rgb_hex('bd93f9'),
+        red=parse_rgb_hex('ff5555'),
+        green=parse_rgb_hex('50fa7b'),
+        magenta=parse_rgb_hex('ff79c6'),
+        white=parse_rgb_hex('f8f8f2'),
+    ),
+    bright_colors=Colors(
+        black=parse_rgb_hex('6272a4'),
+        cyan=parse_rgb_hex('a4ffff'),
+        red=parse_rgb_hex('ff6e6e'),
+        yellow=parse_rgb_hex('ffffa5'),
+        blue=parse_rgb_hex('d6acff'),
+        green=parse_rgb_hex('69ff94'),
+        magenta=parse_rgb_hex('ff92df'),
+        white=parse_rgb_hex('ffffff'),
+    ),
+)
+
+DRACULA = TerminalTheme(
+    dracula.background,
+    dracula.foreground,
+    dracula.colors,
+    dracula.bright_colors,
+)
 
 cat_mocha = Theme(
     background=(30, 30, 46),
@@ -137,6 +170,7 @@ THEMES = {
     "cat_frappe": CAT_FRAPPE,
     "cat_macchiato": CAT_MACCHIATO,
     "cat_latte": CAT_LATTE,
+    "dracula": DRACULA,
     "monokai": MONOKAI,
     "dimmed_monokai": DIMMED_MONOKAI,
     "night_owlish": NIGHT_OWLISH,
