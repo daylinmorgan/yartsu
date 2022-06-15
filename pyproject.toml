@@ -4,6 +4,7 @@ description = "yartsu, another rich terminal screenshot utility"
 authors = [
     {name = "Daylin Morgan", email = "daylinmorgan@gmail.com"},
 ]
+readme = "README.md"
 dependencies = [
     "rich>=12.3.0",
     "importlib-metadata>=4.11.4; python_version < \"3.8\"",
@@ -24,6 +25,7 @@ dev = [
     "pre-commit>=2.18.1",
     "mypy>=0.961",
 ]
+
 [build-system]
 requires = ["pdm-pep517>=0.12.0"]
 build-backend = "pdm.pep517.api"
