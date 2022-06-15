@@ -1,6 +1,7 @@
 SRC_FILES = $(wildcard yartsu/*)
 
-.PHONY: list lint build svg-docs theme-docs docs typing format
+.PHONY: list lint build svg-docs theme-docs docs typing format dist check-tag
+
 lint: format typing
 
 typing:
@@ -8,6 +9,19 @@ typing:
 
 format:
 	pdm run pre-commit run --all
+
+check-tag:
+	@[ "${TAG}" ] || ( echo ">> TAG is not set"; exit 1 )
+	@git describe HEAD --tags --exact-match
+
+release: build/yartsu check-tag
+	gh release create $(TAG) build/yartsu -p -d
+
+publish: dist
+	twine upload dist/*
+
+dist:
+	pdm build
 
 build: build/yartsu
 
@@ -39,6 +53,8 @@ demo-docs:
 		console.print('\n:snake: [b i]Emoji\'s!'); \
 		console.print('  [cyan]Nerd Fonts!');" \
 		| yartsu -w 25 -o assets/demo.svg
+clean:
+	rm -rf build dist
 
 # https://stackoverflow.com/a/26339924
 list:
