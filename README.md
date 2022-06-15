@@ -108,6 +108,16 @@ You may also use the environment variable `YARTSU_THEME`.
 
 See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/themes.md) a preview of the available themes
 
+### Supported Characters
+
+Currently `yartsu` loads the `nerd font` patched FiraCode font.
+This should result in general support for emoji's and `nerd font` icons.
+
+<div align="center"><img src="https://raw.githubusercontent.com/daylinmorgan/yartsu/main/assets/demo.svg" alt="Logo" width=400 ></div>
+
+**Note**: github won't load the font's when displaying on the README. Click on the `svg` to see the `nerd font` icons.
+
+
 ## TODO
 
 - [ ] add unit tests
