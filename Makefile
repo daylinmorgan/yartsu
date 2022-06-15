@@ -16,7 +16,7 @@ build/yartsu: $(SRC_FILES)
 	shiv \
     	-c yartsu \
     	-o ./build/yartsu \
-    	--preamble preamble.py \
+    	--preamble scripts/preamble.py \
     	--reproducible \
     	.
 
