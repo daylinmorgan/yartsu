@@ -1,6 +1,6 @@
 SRC_FILES = $(wildcard yartsu/*)
 
-.PHONY: list lint build svg-docs theme-docs docs typing format dist check-tag
+.PHONY: list lint build typing format dist check-tag
 
 lint: format typing
 
@@ -37,10 +37,15 @@ build/yartsu: $(SRC_FILES)
 install-bin: build/yartsu
 	cp ./build/yartsu ~/bin
 
-docs: svg-docs theme-docs demo-docs
+.PHONY: svg-docs theme-docs diff-docs demo-docs docs
+
+docs: svg-docs theme-docs demo-docs diff-docs
 
 theme-docs:
 	./scripts/theme-showcase-gen
+
+diff-docs:
+	./scripts/code_svg_format_diff.py > docs/rich-diff.md
 
 svg-docs:
 	lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg
@@ -53,6 +58,7 @@ demo-docs:
 		console.print('\n:snake: [b i]Emoji\'s!'); \
 		console.print('  [cyan]Nerd Fonts!');" \
 		| yartsu -w 25 -o assets/demo.svg
+
 clean:
 	rm -rf build dist
 
