@@ -7,6 +7,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.text import Text
 
+from ._export_format import CONSOLE_SVG_FORMAT
 from ._run_cmd import run_cmd
 from ._version import __version__
 from .argparse import ArgumentParser
@@ -117,6 +118,11 @@ def main() -> None:
 
     console.print(parsed_input)
 
-    console.save_svg(args.output, title=title, theme=THEMES[args.theme])
+    console.save_svg(
+        args.output,
+        title=title,
+        theme=THEMES[args.theme],
+        code_format=CONSOLE_SVG_FORMAT,
+    )
 
     term.print(f"\nSaved to {args.output}.")

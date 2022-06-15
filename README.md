@@ -111,7 +111,7 @@ See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/themes.md) a pr
 ## TODO
 
 - [ ] add unit tests
-- [ ] add support for nerd-fonts
+- [x] add support for nerd-fonts
 - [ ] add optional shadow
 - [ ] add more themes
 
