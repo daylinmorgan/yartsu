@@ -12,7 +12,7 @@ CONSOLE_SVG_FORMAT = """\
     @font-face {{
         font-family: "Fira Code";
         src: local("FiraCode-Bold"),
-            url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@2.1.0/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf") format("truetype");
+            url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@2.1.0/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf") format("truetype");
         font-style: bold;
         font-weight: 700;
     }}
