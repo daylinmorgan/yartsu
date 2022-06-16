@@ -25,8 +25,8 @@
 
 Inspired by recent commits in the wonderful library [`rich`](https://github.com/Textualize/rich) I decided to write ` yartsu`.
 
-I needed to programatically generate screenshots for documentation purposes. The new `export_svg` methods in `rich` were a godsend.
-So I wanted to try to make this feature a little more generalizable to program ouptut outside of `rich`/`python`.
+I needed to programmatically generate screenshots for documentation purposes. The new `export_svg` methods in `rich` were a godsend.
+So I wanted to try to make this feature a little more generalizable to program output outside of `rich`/`python`.
 Hopefully, you find it useful.
 
 If you come across anything unexpected please submit an issue.
@@ -37,15 +37,14 @@ If you come across anything unexpected please submit an issue.
 pip install yartsu
 ```
 
-You can also download the [`shiv`](https://github.com/linkedin/shiv) based zipapp from the releases page.
-
+There is a standalone binary available for linux :
 Optionally with [`eget`](https://github.com/zyedidia/eget):
 
 ```bash
 eget daylinmorgan/yartsu
 ```
 
-This version will bundle depedencies and unpack them at `~/.shiv` at first runtime.
+This version will bundle dependencies and unpack them at `~/.shiv` at first runtime.
 You can change this location by setting the `SHIV_ROOT` environment variable.
 See `shiv` for more info.
 
@@ -75,7 +74,7 @@ ls --color=always | yartsu -w 50 -o assets/ls_color.svg
 With this option `yartsu` will deploy a `subprocess` and `pty`
 to run your command for you in an attempt to preserve ANSI.
 
-Note with this option you need to seperate
+Note with this option you need to separate
 the command you want to run with `yartsu` args using `--`.
 
 ```bash
