@@ -24,15 +24,16 @@ def get_args() -> Namespace:
         usage=SUPPRESS,
         description=textwrap.dedent(
             r"""
-        [bold italic cyan]usage[/]:
-
-            ls --color=always | yartsu \[options]
-            [dim]OR[/]
-            yartsu \[options] -- ls --color
-            [dim]OR[/]
-            ls --color=always > ls.txt; yartsu -i ls.txt
+        [header]usage[/]:
 
         convert terminal output to svg
+
+            `ls --color=always | yartsu \[options]`
+            [dim]OR[/]
+            `yartsu \[options] -- ls --color`
+            [dim]OR[/]
+            `ls --color=always > ls.txt; yartsu -i ls.txt`
+
         """
         ),
     )
