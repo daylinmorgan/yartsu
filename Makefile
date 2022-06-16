@@ -19,7 +19,7 @@ release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
 	tar czf build/yartsu-$(VERSION)-x86_64-linux.tar.gz \
 		build/x86_64-unknown-linux-gnu/release/install/yartsu
 
-release: build/yartsu check-tag release-asset
+release: check-tag release-assets
 	gh release create $(TAG) build/yartsu-$(VERSION)-x86_64-linux.tar.gz -p -d
 
 publish: dist
