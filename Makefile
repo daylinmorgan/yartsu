@@ -1,6 +1,7 @@
-SRC_FILES = $(wildcard yartsu/*)
+SRC_FILES := $(wildcard yartsu/*)
+VERSION := $(shell pdm show | grep "Installed" | awk -F ":" 'gsub(/ /, ""){print $$2}')
 
-.PHONY: list lint build typing format dist check-tag
+.PHONY: list lint build typing format dist check-tag release-asset
 
 lint: format typing
 
@@ -14,8 +15,12 @@ check-tag:
 	@[ "${TAG}" ] || ( echo ">> TAG is not set"; exit 1 )
 	@git describe HEAD --tags --exact-match
 
-release: build/yartsu check-tag
-	gh release create $(TAG) build/yartsu -p -d
+release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
+	tar czf build/yartsu-$(VERSION)-x86_64-linux.tar.gz \
+		build/x86_64-unknown-linux-gnu/release/install/yartsu
+
+release: build/yartsu check-tag release-asset
+	gh release create $(TAG) build/yartsu-$(VERSION)-x86_64-linux.tar.gz -p -d
 
 publish: dist
 	twine upload dist/*
@@ -25,17 +30,23 @@ dist:
 
 build: build/yartsu
 
-build/yartsu: $(SRC_FILES)
-	mkdir -p build
+build/shiv/yartsu: $(SRC_FILES)
+	mkdir -p build/shiv
 	shiv \
-    	-c yartsu \
-    	-o ./build/yartsu \
-    	--preamble scripts/preamble.py \
-    	--reproducible \
-    	.
+		-c yartsu \
+		-o ./build/shiv/yartsu \
+		--preamble scripts/preamble.py \
+		--reproducible \
+		.
 
-install-bin: build/yartsu
-	cp ./build/yartsu ~/bin
+build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu: $(SRC_FILES)
+	pyoxidizer build --release
+
+install-bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
+	cp ./build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ~/bin
+
+install-shiv: build/shiv/yartsu
+	cp ./build/shiv/yartsu ~/bin
 
 .PHONY: svg-docs theme-docs diff-docs demo-docs docs
 
@@ -45,7 +56,7 @@ theme-docs:
 	./scripts/theme-showcase-gen
 
 diff-docs:
-	./scripts/code_svg_format_diff.py > docs/rich-diff.md
+	./scripts/code_svg_format_diff.py >docs/rich-diff.md
 
 svg-docs:
 	lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg
@@ -54,13 +65,13 @@ svg-docs:
 demo-docs:
 	python -c \
 		"from rich.console import Console; \
-		console = Console(force_terminal=True); \
-		console.print('\n:snake: [b i]Emoji\'s!'); \
-		console.print('  [cyan]Nerd Fonts!');" \
-		| yartsu -w 25 -o assets/demo.svg
+			console = Console(force_terminal=True); \
+			console.print('\n:snake: [b i]Emoji\'s!'); \
+			console.print('  [cyan]Nerd Fonts!');" | \
+		yartsu -w 25 -o assets/demo.svg
 
 clean:
-	rm -rf build dist
+	rm -rf build dist capture.svg
 
 # https://stackoverflow.com/a/26339924
 list:

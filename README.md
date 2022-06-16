@@ -37,16 +37,15 @@ If you come across anything unexpected please submit an issue.
 pip install yartsu
 ```
 
-There is a standalone binary available for linux :
-Optionally with [`eget`](https://github.com/zyedidia/eget):
+There is a standalone binary available for linux in the [releases](https://github.com/daylinmorgan/yartsu/releases).
+
+Optionally install with [`eget`](https://github.com/zyedidia/eget):
 
 ```bash
 eget daylinmorgan/yartsu
 ```
 
-This version will bundle dependencies and unpack them at `~/.shiv` at first runtime.
-You can change this location by setting the `SHIV_ROOT` environment variable.
-See `shiv` for more info.
+Otherwise you can download an extract manually to somewhere on your path.
 
 ## Usage
 
