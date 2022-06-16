@@ -29,7 +29,7 @@ release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu che
 release: check-tag release-assets
 	gh release create $(TAG) build/yartsu-$(VERSION)-x86_64-linux.tar.gz -p -d
 
-publish: dist
+publish: check-version dist
 	twine upload dist/*
 
 dist:
