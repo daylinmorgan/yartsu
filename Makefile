@@ -15,7 +15,14 @@ check-tag:
 	@[ "${TAG}" ] || ( echo ">> TAG is not set"; exit 1 )
 	@git describe HEAD --tags --exact-match
 
-release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
+check-version:
+	@if [[ "${VERSION}" == *"+"* ]]; then \
+		echo ">> VERSION is dev"; \
+		echo ">> $(VERSION)"; \
+		exit 1; \
+	fi
+
+release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu check-version
 	tar czf build/yartsu-$(VERSION)-x86_64-linux.tar.gz \
 		build/x86_64-unknown-linux-gnu/release/install/yartsu
 
@@ -40,6 +47,7 @@ build/shiv/yartsu: $(SRC_FILES)
 		.
 
 build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu: $(SRC_FILES)
+	pdm install
 	pyoxidizer build --release
 
 install-bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
