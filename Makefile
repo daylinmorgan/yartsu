@@ -64,7 +64,7 @@ theme-docs:
 	./scripts/theme-showcase-gen
 
 diff-docs:
-	./scripts/code_svg_format_diff.py >docs/rich-diff.md
+	./scripts/rich-diff > docs/rich-diff.md
 
 svg-docs:
 	lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg

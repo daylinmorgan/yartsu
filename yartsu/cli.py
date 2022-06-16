@@ -5,13 +5,13 @@ from argparse import SUPPRESS, FileType, Namespace
 from pathlib import Path
 
 from rich.__main__ import make_test_card
-from rich.console import Console
 from rich.text import Text
 
 from ._export_format import CONSOLE_SVG_FORMAT
 from ._run_cmd import run_cmd
 from ._version import __version__
 from .argparse import ArgumentParser
+from .console import Console
 from .term import term
 from .themes import THEMES
 

@@ -16,31 +16,36 @@ CONSOLE_SVG_FORMAT = """\
         font-style: bold;
         font-weight: 700;
     }}
+
     .{unique_id}-matrix {{
         font-family: Fira Code, monospace;
         font-size: {char_height}px;
         line-height: {line_height}px;
         font-variant-east-asian: full-width;
     }}
+
     .{unique_id}-title {{
         font-size: 18px;
         font-weight: bold;
         font-family: arial;
     }}
+
     .shadow {{
-        -webkit-filter: drop-shadow( 5px 10px 15px rgba(0, 0, 0, .7));
-        filter: drop-shadow( 5px 10px 15px rgba(0, 0, 0, .7));
+        -webkit-filter: drop-shadow( 2px 5px 2px rgba(0, 0, 0, .7));
+        filter: drop-shadow( 2px 5px 2px rgba(0, 0, 0, .7));
     }}
     {styles}
     </style>
+
     <defs>
     <clipPath id="{unique_id}-clip-terminal">
       <rect x="0" y="0" width="{terminal_width}" height="{terminal_height}" />
     </clipPath>
     {lines}
     </defs>
+
     {chrome}
-    <g transform="translate({terminal_x}, {terminal_y})" clip-path="url(#{unique_id}-clip-terminal)">
+    <g transform="translate({terminal_x}, {terminal_y}) scale(.95)" clip-path="url(#{unique_id}-clip-terminal)">
     {backgrounds}
     <g class="{unique_id}-matrix">
     {matrix}
