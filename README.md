@@ -113,13 +113,16 @@ This should result in general support for emoji's and `nerd font` icons.
 
 **Note**: github won't load the font's when displaying on the README. Click on the `svg` to see the `nerd font` icons.
 
+### Differences from [`Rich`](https://github.com/Textualize/rich)
+
+For both practical and stylistic reasons the underlying code used to generate the SVG is slightly different than `rich`'s default `save_svg` method. See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/rich-diff.md) for the current deviation between the latest releases of each respective release.
+
 
 ## TODO
 
 - [ ] add unit tests
 - [x] add support for nerd-fonts
 - [x] add ~~optional~~ shadow
-- [ ] add more themes
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
