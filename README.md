@@ -49,7 +49,7 @@ Otherwise you can download an extract manually to somewhere on your path.
 
 ## Usage
 
-<div align="center"><img src="https://raw.githubusercontent.com/daylinmorgan/yartsu/main/assets/yartsu.svg" alt="Logo" width=600 ></div>
+<div align="center"><img src="https://raw.githubusercontent.com/daylinmorgan/yartsu/main/assets/help.svg" alt="Logo" width=600 ></div>
 
 Getting a properly formatted output from a terminal screenshot is challenging.
 

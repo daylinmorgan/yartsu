@@ -68,7 +68,7 @@ diff-docs:
 
 svg-docs:
 	lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg
-	yartsu -o assets/yartsu.svg -t "yartsu --help" -- yartsu -h
+	yartsu -o assets/help.svg -t "yartsu --help" -- yartsu -h
 
 demo-docs:
 	python -c \
