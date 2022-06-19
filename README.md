@@ -118,11 +118,12 @@ This should result in general support for emoji's and `nerd font` icons.
 For both practical and stylistic reasons the underlying code used to generate the SVG is slightly different than `rich`'s default `save_svg` method. See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/rich-diff.md) for the current deviation between the latest releases of each respective release.
 
 
-## TODO
+## TODO (for stable release)
 
-- [ ] add unit tests
 - [x] add support for nerd-fonts
 - [x] add ~~optional~~ shadow
+- [ ] add unit tests
+- [ ] setup CI for release/testing
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
