@@ -1,7 +1,7 @@
 import os
 import sys
 import textwrap
-from argparse import SUPPRESS, FileType, Namespace
+from argparse import SUPPRESS, FileType
 from pathlib import Path
 
 from rich.__main__ import make_test_card
@@ -18,7 +18,7 @@ from .themes import THEMES
 DEFAULT_THEME = os.getenv("YARTSU_THEME", "cat-mocha")
 
 
-def get_args() -> Namespace:
+def get_parser() -> ArgumentParser:
 
     parser = ArgumentParser(
         usage=SUPPRESS,
@@ -67,11 +67,12 @@ def get_args() -> Namespace:
         "--list-themes", help="list available themes", action="store_true"
     )
     parser.add_argument("--demo", help=SUPPRESS, action="store_true")
-    return parser.parse_args()
+    return parser
 
 
 def main() -> None:
-    args = get_args()
+    parser = get_parser()
+    args = parser.parse_args()
     console = Console(record=True)
 
     if args.list_themes:
@@ -85,7 +86,8 @@ def main() -> None:
             "OR pipe terminal output to yartsu",
             err=True,
         )
-        term.print("See 'yartsu --help' for more information", err=True)
+        term.print("See below for more information:\n")
+        parser.print_help()
         sys.exit(1)
 
     if args.theme not in THEMES:
