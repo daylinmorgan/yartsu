@@ -1,5 +1,6 @@
 capture.svg
 .pdm.toml
+.task.mk
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 

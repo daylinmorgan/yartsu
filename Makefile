@@ -1,17 +1,14 @@
+VERSION ?= $(shell git describe --tags --always --dirty=-dev | sed 's/^v//g')
 SRC_FILES := $(wildcard yartsu/*)
-VERSION := $(shell pdm show | grep "Installed" | awk -F ":" 'gsub(/ /, ""){print $$2}')
+# TODO: use git not pdm
 
 .PHONY: lint typecheck build format
 
-## apply formatting, linting and typechecking (default)
-check: lint typecheck
-
-## perform typechecking
-typcheck:
+check: lint typecheck ## apply formatting, linting and typechecking (default)
+typcheck: ## perform typechecking
 	pdm run mypy yartsu
 
-## format/lint with pre-commit(black,isort,flake8)
-lint:
+lint: ## format/lint with pre-commit(black,isort,flake8)
 	pdm run pre-commit run --all
 
 .PHONY: dist release release.assets dist build
@@ -20,27 +17,23 @@ release.assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu che
 	tar czf build/yartsu-$(VERSION)-x86_64-linux.tar.gz \
 		build/x86_64-unknown-linux-gnu/release/install/yartsu
 
-## create github release and attach gzipped binary
-release: check-tag release-assets
+release: check-tag release-assets ## create github release and attach gzipped binary
 	gh release create $(TAG) build/yartsu-$(VERSION)-x86_64-linux.tar.gz -p -d
 
-## publish to pypi with twine
-publish: check-version dist
+publish: check-version dist ## publish to pypi with twine
 	twine upload dist/*
 
-## build wheel/targz with pdm
-dist:
+dist: ## build wheel/targz with pdm
 	pdm build
 
-## build with pyoxidizer
-build: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
+build: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu  ## build with pyoxidizer
 
 build/shiv/yartsu: $(SRC_FILES)
 	@echo "==> Building yartsu w/ shiv <=="
 	@mkdir -p build/shiv
 	@shiv \
 		-c yartsu \
-		-o ./build/shiv/yartsu \
+		-o ./build/yartsu \
 		--preamble scripts/preamble.py \
 		--reproducible \
 		.
@@ -52,34 +45,29 @@ build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu: $(SRC_FILES)
 
 .PHONY: install.bin install.shiv
 
-## install pyoxidizer binary
-install.bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu
+install-bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ## install pyoxidizer binary
 	@echo "==> Installing yartsu to ~/bin <=="
 	@cp ./build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ~/bin
 
-## install shiv binary
-install.shiv: build/shiv/yartsu
+install-shiv: build/shiv/yartsu ## install shiv binary
 	@echo "==> Installing yartsu to ~/bin <=="
 	@cp ./build/shiv/yartsu ~/bin
 
-DOCS_RECIPES := $(patsubst %,docs.%,theme diff svg demo)
-
+DOCS_RECIPES := $(patsubst %,docs-%,theme diff svg demo)
 .PHONY: docs $(DOCS_RECIPES)
+docs: $(DOCS_RECIPES) ## generate docs/svg
 
-## generate docs/svg
-docs: $(DOCS_RECIPES)
-
-docs.theme:
+docs-theme:
 	@./scripts/theme-showcase-gen
 
-docs.diff:
+docs-diff:
 	@./scripts/rich-diff > docs/rich-diff.md
 
-docs.svg:
+docs-svg:
 	@lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg
 	@yartsu -o assets/help.svg -t "yartsu --help" -- yartsu -h
 
-docs.demo:
+docs-demo:
 	@python -c \
 		"from rich.console import Console; \
 			console = Console(force_terminal=True); \
@@ -87,8 +75,7 @@ docs.demo:
 			console.print('  [cyan]Nerd Fonts!');" | \
 		yartsu -w 25 -o assets/demo.svg
 
-## cleanup build and loose files
-clean:
+clean: ## cleanup build and loose files
 	@rm -rf build dist capture.svg
 
 # conditionals
@@ -103,12 +90,5 @@ check-version:
 		exit 1; \
 	fi
 
-.PHONY: help list
-
-FILL = 15
-## Display this help screen
-help: ## try `make help`
-	@awk '/^[a-z.A-Z_-]+:/ { helpMessage = match(lastLine, /^##(.*)/); \
-    if (helpMessage) { helpCommand = substr($$1, 0, index($$1, ":")-1); \
-    helpMessage = substr(lastLine, RSTART + 3, RLENGTH); printf "\033[36m%-$(FILL)s\033[0m%s\n"\
-    , helpCommand, helpMessage;}} { lastLine = $$0 }' $(MAKEFILE_LIST)
+-include .task.mk
+$(if $(filter help,$(MAKECMDGOALS)),$(if $(wildcard .task.mk),,.task.mk: ; curl -fsSL https://raw.githubusercontent.com/daylinmorgan/task.mk/main/task.mk -o .task.mk))
