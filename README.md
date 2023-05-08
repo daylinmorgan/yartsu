@@ -109,14 +109,6 @@ See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/themes.md) a pr
 For both practical and stylistic reasons the underlying code used to generate the SVG is slightly different than `rich`'s default `save_svg` method. See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/rich-diff.md) for the current deviation between the latest releases of each respective release.
 
 
-## TODO (for stable release)
-
-- [x] add support for nerd-fonts
-- [x] add ~~optional~~ shadow
-- [ ] add unit tests
-- [ ] setup CI for release/testing
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/daylinmorgan/yartsu.svg?style=flat
 [contributors-url]: https://github.com/daylinmorgan/yartsu/graphs/contributors
