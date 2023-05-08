@@ -2,6 +2,7 @@ CONSOLE_SVG_FORMAT = """\
 <svg class="rich-terminal shadow" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">
     <!-- Generated with Rich https://www.textualize.io & yartsu https://github.com/daylinmorgan/yartsu -->
     <style>
+
     @font-face {{
         font-family: "Fira Code";
         src: local("FiraCode-Regular"),
