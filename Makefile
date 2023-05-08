@@ -13,7 +13,7 @@ lint: ## format/lint with pre-commit(black,isort,flake8)
 
 .PHONY: dist release release.assets dist build
 
-release.assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu check-version
+release-assets: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu check-version
 	tar czf build/yartsu-$(VERSION)-x86_64-linux.tar.gz \
 		build/x86_64-unknown-linux-gnu/release/install/yartsu
 
