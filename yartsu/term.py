@@ -27,7 +27,6 @@ theme = Theme({"header": "bold cyan", "option": "yellow", "metavar": "green"})
 
 class Term:
     def __init__(self, width: int) -> None:
-
         self.console = Console(highlight=False, theme=theme, width=width)
         self.err_console = Console(
             theme=Theme({"error": "bold red"}, inherit=True),

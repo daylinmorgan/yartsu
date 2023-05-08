@@ -68,7 +68,10 @@ class CustomFormatter(StdHelpFormatter):
         # short action name; start on the same line and pad two spaces
         elif action_header_len <= action_width:
             tup = self._current_indent, "", action_width, action_header
-            action_header = f"{' '*self._current_indent}{action_header}{' '*(action_width+2 - action_header_len)}"
+            action_header = (
+                f"{' '*self._current_indent}{action_header}"
+                f"{' '*(action_width+2 - action_header_len)}"
+            )
             indent_first = 0
 
         # long action name; start on the next line
@@ -114,7 +117,6 @@ class CustomFormatter(StdHelpFormatter):
 
     def add_argument(self, action: Action) -> None:
         if action.help is not SUPPRESS:
-
             # find all invocations
             get_invocation = self._format_action_invocation
             invocations = [get_invocation(action)]

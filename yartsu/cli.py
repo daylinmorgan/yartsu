@@ -19,7 +19,6 @@ DEFAULT_THEME = os.getenv("YARTSU_THEME", "cat-mocha")
 
 
 def get_parser() -> ArgumentParser:
-
     parser = ArgumentParser(
         usage=SUPPRESS,
         description=textwrap.dedent(
