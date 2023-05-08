@@ -25,14 +25,10 @@ def get_parser() -> ArgumentParser:
             r"""
         [header]usage[/]:
 
-        convert terminal output to svg
-
-            `ls --color=always | yartsu \[options]`
-            [dim]OR[/]
-            `yartsu \[options] -- ls --color`
-            [dim]OR[/]
-            `ls --color=always > ls.txt; yartsu -i ls.txt`
-
+        three ways to convert terminal output to svg:
+            1: `ls --color=always | yartsu \[options]`
+            2: `yartsu \[options] -- ls --color`
+            3: `ls --color=always > ls.txt; yartsu -i ls.txt`
         """
         ),
     )
