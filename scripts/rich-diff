@@ -49,7 +49,6 @@ def unidiff_output(expected, actual):
 
 
 def main():
-
     print(
         MARKDOWN_DOC.format(
             rich_version=version("rich"),
