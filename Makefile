@@ -5,7 +5,7 @@ SRC_FILES := $(wildcard yartsu/*)
 .PHONY: lint typecheck build format
 
 check: lint typecheck ## apply formatting, linting and typechecking (default)
-typcheck: ## perform typechecking
+typecheck: ## perform typechecking
 	pdm run mypy yartsu
 
 lint: ## format/lint with pre-commit(black,isort,flake8)
