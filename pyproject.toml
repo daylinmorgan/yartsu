@@ -49,5 +49,5 @@ select = ["F", "E", "W", "I001"]
 exclude = ["scripts"]
 [tool.ruff.per-file-ignores]
 # I guess they don't mind some long lines?
-"yartsu/_export_format.py" = ["E501"]
-"yartsu/console.py" = ["E501"]
+"src/yartsu/_export_format.py" = ["E501"]
+"src/yartsu/console.py" = ["E501"]
