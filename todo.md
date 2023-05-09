@@ -7,4 +7,8 @@
   - [ ] pypi
   - [ ] pyoxidizer (and nightly?)
 
+## Stretch Goal
+
+- [ ] convert asciicast into an animated svg
+
 <!-- generated with <3 by daylinmorgan/todo -->
