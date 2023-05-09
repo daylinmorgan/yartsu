@@ -29,6 +29,9 @@ dev = [
     "mypy>=0.961",
 ]
 
+[tool.pdm.build]
+includes = ["src", "src/yartsu/themes"]
+
 [build-system]
 requires = ["pdm-pep517>=0.12.0"]
 build-backend = "pdm.pep517.api"

@@ -1,4 +1,6 @@
-from collections import namedtuple
+import json
+import sys
+from importlib.resources import files
 
 from rich.color import parse_rgb_hex
 from rich.terminal_theme import (
@@ -9,225 +11,69 @@ from rich.terminal_theme import (
     TerminalTheme,
 )
 
-Colors = namedtuple("Colors", "black, red, green, yellow, blue, magenta, cyan, white")
-Theme = namedtuple("Theme", "name background, foreground, colors, bright_colors")
+from .term import term
 
-THEME_DEFINITIONS = [
-    Theme(
-        name="cat-mocha",
-        background=(30, 30, 46),
-        foreground=(198, 208, 245),
-        colors=Colors(
-            black=(179, 188, 223),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(86, 89, 112),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-        bright_colors=Colors(
-            black=(161, 168, 201),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(67, 70, 90),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-    ),
-    Theme(
-        name="cat-frappe",
-        background=(48, 52, 70),
-        foreground=(198, 206, 239),
-        colors=Colors(
-            black=(179, 188, 223),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(86, 89, 112),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-        bright_colors=Colors(
-            black=(161, 168, 201),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(67, 70, 90),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-    ),
-    Theme(
-        name="cat-macchiato",
-        background=(36, 39, 58),
-        foreground=(197, 207, 245),
-        colors=Colors(
-            black=(179, 188, 223),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(86, 89, 112),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-        bright_colors=Colors(
-            black=(161, 168, 201),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(67, 70, 90),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-    ),
-    Theme(
-        name="cat-latte",
-        background=(239, 241, 245),
-        foreground=(76, 79, 105),
-        colors=Colors(
-            black=(179, 188, 223),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(86, 89, 112),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-        bright_colors=Colors(
-            black=(161, 168, 201),
-            cyan=(148, 226, 213),
-            yellow=(249, 226, 175),
-            blue=(135, 176, 249),
-            red=(243, 139, 168),
-            white=(67, 70, 90),
-            green=(166, 227, 161),
-            magenta=(245, 194, 231),
-        ),
-    ),
-    Theme(
-        name="dracula",
-        background=parse_rgb_hex("282a36"),
-        foreground=parse_rgb_hex("f8f8f2"),
-        colors=Colors(
-            black=parse_rgb_hex("21222c"),
-            cyan=parse_rgb_hex("8be9fd"),
-            yellow=parse_rgb_hex("f1fa8c"),
-            blue=parse_rgb_hex("bd93f9"),
-            red=parse_rgb_hex("ff5555"),
-            green=parse_rgb_hex("50fa7b"),
-            magenta=parse_rgb_hex("ff79c6"),
-            white=parse_rgb_hex("f8f8f2"),
-        ),
-        bright_colors=Colors(
-            black=parse_rgb_hex("6272a4"),
-            cyan=parse_rgb_hex("a4ffff"),
-            red=parse_rgb_hex("ff6e6e"),
-            yellow=parse_rgb_hex("ffffa5"),
-            blue=parse_rgb_hex("d6acff"),
-            green=parse_rgb_hex("69ff94"),
-            magenta=parse_rgb_hex("ff92df"),
-            white=parse_rgb_hex("ffffff"),
-        ),
-    ),
-    Theme(
-        name="nord",
-        background=parse_rgb_hex("2e3440"),
-        foreground=parse_rgb_hex("d8dee9"),
-        colors=Colors(
-            black=parse_rgb_hex("3b4252"),
-            red=parse_rgb_hex("bf616a"),
-            green=parse_rgb_hex("a3be8c"),
-            yellow=parse_rgb_hex("ebcb8b"),
-            blue=parse_rgb_hex("81a1c1"),
-            magenta=parse_rgb_hex("b48ead"),
-            cyan=parse_rgb_hex("88c0d0"),
-            white=parse_rgb_hex("e5e9f0"),
-        ),
-        bright_colors=Colors(
-            black=parse_rgb_hex("4c566a"),
-            red=parse_rgb_hex("bf616a"),
-            green=parse_rgb_hex("a3be8c"),
-            yellow=parse_rgb_hex("ebcb8b"),
-            blue=parse_rgb_hex("81a1c1"),
-            magenta=parse_rgb_hex("b48ead"),
-            cyan=parse_rgb_hex("8fbcbb"),
-            white=parse_rgb_hex("eceff4"),
-        ),
-    ),
-    Theme(
-        name="gruvbox-dark",
-        ## dark
-        background=parse_rgb_hex("282828"),
-        foreground=parse_rgb_hex("d5c4a1"),
-        # Normal color"),
-        colors=Colors(
-            black=parse_rgb_hex("282828"),
-            red=parse_rgb_hex("fb4934"),
-            green=parse_rgb_hex("b8bb26"),
-            yellow=parse_rgb_hex("fabd2f"),
-            blue=parse_rgb_hex("83a598"),
-            magenta=parse_rgb_hex("d3869b"),
-            cyan=parse_rgb_hex("8ec07c"),
-            white=parse_rgb_hex("d5c4a1"),
-        ),
-        bright_colors=Colors(
-            black=parse_rgb_hex("665c54"),
-            red=parse_rgb_hex("fe8019"),
-            green=parse_rgb_hex("3c3836"),
-            yellow=parse_rgb_hex("504945"),
-            blue=parse_rgb_hex("bdae93"),
-            magenta=parse_rgb_hex("ebdbb2"),
-            cyan=parse_rgb_hex("d65d0e"),
-            white=parse_rgb_hex("fbf1c7"),
-        ),
-    ),
-    Theme(
-        name="gruvbox-light",
-        background=parse_rgb_hex("fbf1c7"),
-        foreground=parse_rgb_hex("504945"),
-        colors=Colors(
-            black=parse_rgb_hex("fbf1c7"),
-            red=parse_rgb_hex("9d0006"),
-            green=parse_rgb_hex("79740e"),
-            yellow=parse_rgb_hex("b57614"),
-            blue=parse_rgb_hex("076678"),
-            magenta=parse_rgb_hex("8f3f71"),
-            cyan=parse_rgb_hex("427b58"),
-            white=parse_rgb_hex("504945"),
-        ),
-        bright_colors=Colors(
-            black=parse_rgb_hex("bdae93"),
-            red=parse_rgb_hex("af3a03"),
-            green=parse_rgb_hex("ebdbb2"),
-            yellow=parse_rgb_hex("d5c4a1"),
-            blue=parse_rgb_hex("665c54"),
-            magenta=parse_rgb_hex("3c3836"),
-            cyan=parse_rgb_hex("d65d0e"),
-            white=parse_rgb_hex("282828"),
-        ),
-    ),
-]
+
+def get_builtin_themes():
+    return (
+        resource.name.split(".")[0]
+        for resource in (files("yartsu") / "themes").iterdir()
+        if resource.is_file()
+    )
+
+
+def load_theme(name: str) -> TerminalTheme:
+    theme_file = files("yartsu") / "themes" / f"{name}.json"
+    with theme_file.open("r") as f:
+        theme_json = json.load(f)
+
+    try:
+        format = theme_json["format"]
+
+        if format == "rgb":
+            background = theme_json["background"]
+            foreground = theme_json["foreground"]
+            colors = theme_json["colors"]
+            if "bright_colors" in theme_json:
+                bright_colors = theme_json["bright_colors"]
+            else:
+                bright_colors = colors
+
+        elif format == "hex":
+            background = parse_rgb_hex(theme_json["background"])
+            foreground = parse_rgb_hex(theme_json["foreground"])
+            colors = [parse_rgb_hex(c) for c in theme_json["colors"]]
+            if "bright_colors" in theme_json:
+                bright_colors = [parse_rgb_hex(c) for c in theme_json["bright_colors"]]
+            else:
+                bright_colors = colors
+        else:
+            print("[ThemeError]: unknown color format type {color_fmt}")
+
+        theme = TerminalTheme(background, foreground, colors, bright_colors)
+    except KeyError as e:
+        term.print(
+            f"[ThemeError]: error loading {name} theme. "
+            f"Couldn't load {e} from theme json.",
+            err=True,
+        )
+        sys.exit(1)
+
+    return theme
 
 
 THEMES = {
-    **{
-        theme.name: TerminalTheme(
-            theme.background,
-            theme.foreground,
-            theme.colors,
-            theme.bright_colors,
-        )
-        for theme in THEME_DEFINITIONS
-    },
+    # **{
+    #     theme.name: TerminalTheme(
+    #         theme.background,
+    #         theme.foreground,
+    #         theme.colors,
+    #         theme.bright_colors,
+    #     )
+    #     for theme in THEME_DEFINITIONS
+    #
+    # },
+    **{name: load_theme(name) for name in get_builtin_themes()},
     **{
         "monokai": MONOKAI,
         "dimmed_monokai": DIMMED_MONOKAI,
