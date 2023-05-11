@@ -1,7 +1,9 @@
 import json
 import os
+import platform
 import sys
 from importlib.resources import files
+from pathlib import Path
 
 from rich import box
 from rich.color import parse_rgb_hex
@@ -23,9 +25,11 @@ class YartsuTheme(TerminalTheme):
         self.src = src
 
     @classmethod
-    def load_theme(cls, name: str, src: str):
-        theme_file = files("yartsu") / "themes" / f"{name}.json"
-        with theme_file.open("r") as f:
+    def load_theme(cls, themepath: Path, src: str):
+        # theme_file = files("yartsu") / "themes" / f"{name}.json"
+        name = themepath.stem
+
+        with themepath.open("r") as f:
             theme_json = json.load(f)
 
         try:
@@ -69,6 +73,7 @@ class ThemeDB:
         self.default = os.getenv("YARTSU_THEME", "cat-mocha")
         self.selected = self.default
         self.themes = {
+            **self._load_user_themes(),
             **self._load_yartsu_themes(),
             **{
                 "dimmed_monokai": DIMMED_MONOKAI,
@@ -76,17 +81,38 @@ class ThemeDB:
                 "night-owlish": NIGHT_OWLISH,
                 "rich-default": SVG_EXPORT_THEME,
             },
+            **self._load_user_themes(),
         }
+
+    def _user_themes_location(self):
+        if platform.system() == "Windows":
+            theme_dir = os.getenv("APPDATA") / "yarstu" / "themes"
+        else:
+            if XDG_CONFIG_DIR := os.getenv("XDG_CONFIG_DIR"):
+                theme_dir = Path(XDG_CONFIG_DIR) / "yartsu" / "themes"
+            else:
+                theme_dir = Path.home() / ".config" / "yartsu" / "themes"
+
+        return theme_dir
 
     def _load_yartsu_themes(self):
         return {
-            name: YartsuTheme.load_theme(name, src="yartsu")
-            for name in sorted(
-                resource.name.split(".")[0]
+            themepath.stem: YartsuTheme.load_theme(themepath, src="yartsu")
+            for themepath in sorted(
+                resource
                 for resource in (files("yartsu") / "themes").iterdir()
                 if resource.is_file()
             )
         }
+
+    def _load_user_themes(self):
+        if (themes_dir := self._user_themes_location()).is_dir():
+            return {
+                p.stem: YartsuTheme.load_theme(p, src="user")
+                for p in themes_dir.glob("*.json")
+            }
+        else:
+            return {}
 
     def list(self):
         table = Table(title="Available Themes", box=box.MINIMAL)
@@ -96,5 +122,4 @@ class ThemeDB:
         for name, theme in self.themes.items():
             source = theme.src if isinstance(theme, YartsuTheme) else "rich"
             table.add_row(name, source)
-
         term.print(table)
