@@ -1,8 +1,11 @@
 import json
+import os
 import sys
 from importlib.resources import files
 
+from rich import box
 from rich.color import parse_rgb_hex
+from rich.table import Table
 from rich.terminal_theme import (
     DIMMED_MONOKAI,
     MONOKAI,
@@ -61,23 +64,37 @@ class YartsuTheme(TerminalTheme):
         return cls(background, foreground, colors, bright_colors, src=src)
 
 
-def get_builtin_themes():
-    return (
-        resource.name.split(".")[0]
-        for resource in (files("yartsu") / "themes").iterdir()
-        if resource.is_file()
-    )
+class ThemeDB:
+    def __init__(self):
+        self.default = os.getenv("YARTSU_THEME", "cat-mocha")
+        self.selected = self.default
+        self.themes = {
+            **self._load_yartsu_themes(),
+            **{
+                "dimmed_monokai": DIMMED_MONOKAI,
+                "monokai": MONOKAI,
+                "night-owlish": NIGHT_OWLISH,
+                "rich-default": SVG_EXPORT_THEME,
+            },
+        }
 
+    def _load_yartsu_themes(self):
+        return {
+            name: YartsuTheme.load_theme(name, src="yartsu")
+            for name in sorted(
+                resource.name.split(".")[0]
+                for resource in (files("yartsu") / "themes").iterdir()
+                if resource.is_file()
+            )
+        }
 
-THEMES = {
-    **{
-        name: YartsuTheme.load_theme(name, src="yartsu")
-        for name in get_builtin_themes()
-    },
-    **{
-        "monokai": MONOKAI,
-        "dimmed_monokai": DIMMED_MONOKAI,
-        "night-owlish": NIGHT_OWLISH,
-        "rich-default": SVG_EXPORT_THEME,
-    },
-}
+    def list(self):
+        table = Table(title="Available Themes", box=box.MINIMAL)
+        table.add_column("name")
+        table.add_column("source")
+
+        for name, theme in self.themes.items():
+            source = theme.src if isinstance(theme, YartsuTheme) else "rich"
+            table.add_row(name, source)
+
+        term.print(table)

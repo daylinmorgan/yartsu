@@ -2,7 +2,7 @@
 
 THEME_MD="./docs/themes.md"
 
-themes=$(yartsu --list-themes | tail -n +2 | awk '{print $2}')
+themes=$(yartsu --list-themes | tail -n +5 | cut -d' ' -f 3)
 
 newline() {
 	echo >>"$THEME_MD"

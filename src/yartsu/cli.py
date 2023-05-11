@@ -1,4 +1,3 @@
-import os
 import sys
 import textwrap
 from argparse import SUPPRESS, FileType
@@ -13,9 +12,9 @@ from ._version import __version__
 from .argparse import ArgumentParser
 from .console import Console
 from .term import term
-from .themes import THEMES
+from .themes import ThemeDB
 
-DEFAULT_THEME = os.getenv("YARTSU_THEME", "cat-mocha")
+themes = ThemeDB()
 
 
 def get_parser() -> ArgumentParser:
@@ -56,7 +55,7 @@ def get_parser() -> ArgumentParser:
         "--theme",
         help="theme to use for highlighting [default: %(default)s]",
         type=str,
-        default=DEFAULT_THEME,
+        default=themes.default,
     )
     parser.add_argument(
         "--list-themes", help="list available themes", action="store_true"
@@ -71,8 +70,7 @@ def main() -> None:
     console = Console(record=True)
 
     if args.list_themes:
-        term.print("Available themes:")
-        term.print("\n".join(["  - " + theme for theme in THEMES]))
+        themes.list()
         sys.exit(0)
 
     if args.cmd and args.input or not (args.cmd or args.input or args.demo):
@@ -85,7 +83,8 @@ def main() -> None:
         parser.print_help()
         sys.exit(1)
 
-    if args.theme not in THEMES:
+    # TODO: move this error somewhere else
+    if args.theme not in themes.themes:
         term.print(f"[ThemeError]: {args.theme} is not a valid theme", err=True)
         sys.exit(1)
 
@@ -126,7 +125,7 @@ def main() -> None:
     console.save_svg(
         args.output,
         title=title,
-        theme=THEMES[args.theme],
+        theme=themes.themes[args.theme],
         code_format=CONSOLE_SVG_FORMAT,
     )
 
