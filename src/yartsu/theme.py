@@ -69,7 +69,7 @@ class YartsuTheme(TerminalTheme):
 
 class ThemeDB:
     def __init__(self):
-        self.default = os.getenv("YARTSU_THEME", "cat-frappe")
+        self.default = os.getenv("YARTSU_THEME", "cat-mocha")
         self.selected = self.default
         self.themes = {
             **self._load_yartsu_themes(),
