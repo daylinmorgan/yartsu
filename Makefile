@@ -29,7 +29,6 @@ build: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu  ## build wi
 
 build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu: $(SRC_FILES)
 	@echo "==> Building yartsu w/ pyxoxidizer <=="
-	@pdm install
 	@pyoxidizer build --release
 
 .PHONY: install.bin install.shiv
