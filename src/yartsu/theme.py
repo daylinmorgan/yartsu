@@ -2,7 +2,6 @@ import json
 import os
 import platform
 import sys
-from importlib.resources import files
 from pathlib import Path
 
 from rich import box
@@ -16,6 +15,7 @@ from rich.terminal_theme import (
     TerminalTheme,
 )
 
+from ._themes import THEMES
 from .term import term
 
 
@@ -26,7 +26,6 @@ class YartsuTheme(TerminalTheme):
 
     @classmethod
     def load_theme(cls, themepath: Path, src: str):
-        # theme_file = files("yartsu") / "themes" / f"{name}.json"
         name = themepath.stem
 
         with themepath.open("r") as f:
@@ -70,10 +69,9 @@ class YartsuTheme(TerminalTheme):
 
 class ThemeDB:
     def __init__(self):
-        self.default = os.getenv("YARTSU_THEME", "cat-mocha")
+        self.default = os.getenv("YARTSU_THEME", "cat-frappe")
         self.selected = self.default
         self.themes = {
-            **self._load_user_themes(),
             **self._load_yartsu_themes(),
             **{
                 "dimmed_monokai": DIMMED_MONOKAI,
@@ -96,14 +94,7 @@ class ThemeDB:
         return theme_dir
 
     def _load_yartsu_themes(self):
-        return {
-            themepath.stem: YartsuTheme.load_theme(themepath, src="yartsu")
-            for themepath in sorted(
-                resource
-                for resource in (files("yartsu") / "themes").iterdir()
-                if resource.is_file()
-            )
-        }
+        return {name: YartsuTheme(*colors, src="yartsu") for name, colors in THEMES}
 
     def _load_user_themes(self):
         if (themes_dir := self._user_themes_location()).is_dir():
