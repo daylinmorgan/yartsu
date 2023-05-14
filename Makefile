@@ -35,9 +35,7 @@ install-bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ## ins
 	$(call msg,Installing yartsu to ~/bin)
 	@cp ./build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ~/bin
 
-DOCS_RECIPES := $(patsubst %,docs-%,theme diff)
-.PHONY: $(DOCS_RECIPES)
-docs: docs/index.md $(DOCS_RECIPES) ## generate docs/svg
+docs: docs/index.md docs/rich-diff.md ## generate docs/svg
 	@mkdocs build
 
 docs/index.md: README.md
@@ -46,8 +44,8 @@ docs/index.md: README.md
 docs-theme:
 	@./scripts/theme-showcase-gen
 
-docs-diff:
-	@./scripts/rich-diff > docs/rich-diff.md
+docs/rich-diff.md:
+	@./scripts/rich-diff > $@
 
 docs-logos:
 	@lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg

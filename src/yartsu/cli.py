@@ -89,7 +89,17 @@ def main() -> None:
         term.print(f"[ThemeError]: {args.theme} is not a valid theme", err=True)
         sys.exit(1)
 
-    if args.cmd:
+    if args.demo:
+        console = Console(
+            file=io.StringIO(),
+            record=True,
+            force_terminal=True,
+            color_system="truecolor",
+            legacy_windows=False,
+        )
+        parsed_input = make_test_card()  # type: ignore
+
+    elif args.cmd:
         cmd = " ".join(args.cmd)
 
         try:
@@ -103,20 +113,9 @@ def main() -> None:
             sys.exit(returncode)
 
         parsed_input = Text.from_ansi(captured_output)
-    else:
-        cmd = None
-
-    if args.demo:
-        console = Console(
-            file=io.StringIO(),
-            record=True,
-            force_terminal=True,
-            color_system="truecolor",
-            legacy_windows=False,
-        )
-        parsed_input = make_test_card()  # type: ignore
 
     elif args.input:
+        cmd = None
         parsed_input = Text.from_ansi(args.input.read())
 
     title = args.title or cmd or "yartsu"

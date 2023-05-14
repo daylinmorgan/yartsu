@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
 THEME_MD="./docs/themes.md"
 
 themes=$(yartsu --list-themes | tail -n +5 | cut -d' ' -f 3)
