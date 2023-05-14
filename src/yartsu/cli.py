@@ -67,7 +67,9 @@ def get_parser() -> ArgumentParser:
 def main() -> None:
     parser = get_parser()
     args = parser.parse_args()
-    console = Console(record=True)
+    console = Console(
+        record=True, force_terminal=args.demo, force_interactive=args.demo
+    )
 
     if args.list_themes:
         themes.list()
