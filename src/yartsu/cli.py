@@ -1,3 +1,4 @@
+import io
 import sys
 import textwrap
 from argparse import SUPPRESS, FileType
@@ -67,9 +68,7 @@ def get_parser() -> ArgumentParser:
 def main() -> None:
     parser = get_parser()
     args = parser.parse_args()
-    console = Console(
-        record=True, force_terminal=args.demo, force_interactive=args.demo
-    )
+    console = Console(record=True, force_terminal=True)
 
     if args.list_themes:
         themes.list()
@@ -111,6 +110,7 @@ def main() -> None:
         parsed_input = Text.from_ansi(args.input.read())
 
     elif args.demo:
+        console = Console(file=io.StringIO(), record=True, force_terminal=True)
         parsed_input = make_test_card()  # type: ignore
 
     title = args.title or cmd or "yartsu"
