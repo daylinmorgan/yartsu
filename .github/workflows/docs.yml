@@ -10,40 +10,10 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      # TODO: implement this with pdm?
-      #
-      # - name: Setup Python
-      #   uses: actions/setup-python@v3
-      #   with:
-      #     python-version: "3.9"
-      #
-      # - name: Upgrade pip
-      #   run: |
-      #     # install pip=>20.1 to use "pip cache dir"
-      #     python3 -m pip install --upgrade pip
-      #
-      # - name: Get pip cache dir
-      #   id: pip-cache
-      #   run: echo "::set-output name=dir::$(pip cache dir)"
-      #
-      # - name: Cache dependencies
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ steps.pip-cache.outputs.dir }}
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements-docs.txt') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-
-      #
-      # - name: Install dependencies
-      #   run: python3 -m pip install -r ./requirements-docs.txt
-      #
 
       - uses: pdm-project/setup-pdm@v3
         name: Setup PDM
@@ -52,7 +22,7 @@ jobs:
         run: pdm install       # Then you can use pdm in the following steps.
 
       - name: Build Docs
-      - run: make docs
+        run: make docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
