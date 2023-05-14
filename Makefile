@@ -37,8 +37,11 @@ install-bin: build/x86_64-unknown-linux-gnu/release/install/yartsu/yartsu ## ins
 
 DOCS_RECIPES := $(patsubst %,docs-%,theme diff)
 .PHONY: $(DOCS_RECIPES)
-docs: $(DOCS_RECIPES) ## generate docs/svg
+docs: docs/index.md $(DOCS_RECIPES) ## generate docs/svg
 	@mkdocs build
+
+docs/index.md: README.md
+	@cp $< $@
 
 docs-theme:
 	@./scripts/theme-showcase-gen

@@ -159,6 +159,8 @@ cython_debug/
 
 docs/themes/*.svg
 docs/rich-diff.md
+docs/index.md
+
 capture.svg
 .pdm.toml
 .task.mk
