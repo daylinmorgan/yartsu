@@ -157,6 +157,8 @@ cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 
+docs/themes/*.svg
+docs/rich-diff.md
 capture.svg
 .pdm.toml
 .task.mk

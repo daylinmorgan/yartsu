@@ -1,5 +1,9 @@
 # 📷 yartsu todo's
 
+## Docs
+
+- [ ] document user themes feature
+
 ## Stable Release
 
 - [ ] tests tests tests

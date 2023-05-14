@@ -25,9 +25,10 @@
 [![MIT License][license-shield]][license-url]
 
 
+
 **NOTE**: this is a currently in a beta release and the API is subject to change (feedback welcome)
 
-Inspired by recent commits in the wonderful library [`rich`](https://github.com/Textualize/rich) I decided to write `yartsu`.
+Inspired by recent commits in the wonderful library [`rich`](https://github.com/Textualize/rich) I decided to write ` yartsu`.
 
 I needed to programmatically generate screenshots for documentation purposes. The new `export_svg` methods in `rich` were a godsend.
 So I wanted to try to make this feature a little more generalizable to program output outside of `rich`/`python`.
@@ -44,8 +45,7 @@ pip install yartsu
 ```
 
 ### Releases
-There is a standalone binary available for linux in the [releases](https://github.com/daylinmorgan/yartsu/releases)
-(Support for additional platforms is [planned](https://github.com/daylinmorgan/yartsu/issues/3)).
+There is a standalone binary available for linux in the [releases](https://github.com/daylinmorgan/yartsu/releases).
 
 Optionally install with [`eget`](https://github.com/zyedidia/eget):
 
@@ -103,18 +103,18 @@ By default svgs will be saved at `./capture.svg`.
 Additionally, for options 1 and 3 you may want to define your own title with `-t/--title`.
 For option 2 the title will by default be the cmd ran by `yartsu`.
 
-## Themes
+### Themes:
 
 There are a number of themes you can use to style output.
 Use `yartsu --list-themes` to see the available options.
 Then you can specify the theme you want with `--theme`, i.e. `yartsu --theme rich_default`.
 You may also use the environment variable `YARTSU_THEME`.
 
-See [here](https://gh.dayl.in/yartsu/themes) a preview of the available themes
+See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/themes.md) a preview of the available themes
 
-## Differences from [`Rich`](https://github.com/Textualize/rich)
+### Differences from [`Rich`](https://github.com/Textualize/rich)
 
-For both practical and stylistic reasons the underlying code used to generate the SVG is slightly different than `rich`'s default `save_svg` method. See [here](https://gh.dayl.in/rich-diff) for the current deviation between the latest releases of each respective release.
+For both practical and stylistic reasons the underlying code used to generate the SVG is slightly different than `rich`'s default `save_svg` method. See [here](https://github.com/daylinmorgan/yartsu/blob/main/docs/rich-diff.md) for the current deviation between the latest releases of each respective release.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

@@ -2,65 +2,54 @@
 
 # Themes
 
- Available themes:
+Available themes:
+
 - [cat-mocha](#cat-mocha)
-- [cat-frappe](#cat-frappe)
 - [cat-macchiato](#cat-macchiato)
+- [cat-frappe](#cat-frappe)
 - [cat-latte](#cat-latte)
 - [dracula](#dracula)
-- [nord](#nord)
 - [gruvbox-dark](#gruvbox-dark)
 - [gruvbox-light](#gruvbox-light)
+- [nord](#nord)
+- [dimmed_monokai](#dimmed/monokai)
 - [monokai](#monokai)
-- [dimmed_monokai](#dimmedmonokai)
 - [night-owlish](#night-owlish)
 - [rich-default](#rich-default)
 
-
 ## cat-mocha
-![cat-mocha](../assets/themes/cat-mocha.svg)
+![cat-mocha](./themes/cat-mocha.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-## cat-frappe
-![cat-frappe](../assets/themes/cat-frappe.svg)
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## cat-macchiato
-![cat-macchiato](../assets/themes/cat-macchiato.svg)
+![cat-macchiato](./themes/cat-macchiato.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
+## cat-frappe
+![cat-frappe](./themes/cat-frappe.svg)
+<p align="right">(<a href="#top">back to top</a>)</p>
 ## cat-latte
-![cat-latte](../assets/themes/cat-latte.svg)
+![cat-latte](./themes/cat-latte.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 ## dracula
-![dracula](../assets/themes/dracula.svg)
+![dracula](./themes/dracula.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-## nord
-![nord](../assets/themes/nord.svg)
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## gruvbox-dark
-![gruvbox-dark](../assets/themes/gruvbox-dark.svg)
+![gruvbox-dark](./themes/gruvbox-dark.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 ## gruvbox-light
-![gruvbox-light](../assets/themes/gruvbox-light.svg)
+![gruvbox-light](./themes/gruvbox-light.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-## monokai
-![monokai](../assets/themes/monokai.svg)
+## nord
+![nord](./themes/nord.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 ## dimmed_monokai
-![dimmed_monokai](../assets/themes/dimmed_monokai.svg)
+![dimmed_monokai](./themes/dimmed_monokai.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
+## monokai
+![monokai](./themes/monokai.svg)
+<p align="right">(<a href="#top">back to top</a>)</p>
 ## night-owlish
-![night-owlish](../assets/themes/night-owlish.svg)
+![night-owlish](./themes/night-owlish.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 ## rich-default
-![rich-default](../assets/themes/rich-default.svg)
+![rich-default](./themes/rich-default.svg)
 <p align="right">(<a href="#top">back to top</a>)</p>
