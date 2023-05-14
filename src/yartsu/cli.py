@@ -106,12 +106,18 @@ def main() -> None:
     else:
         cmd = None
 
-    if args.input:
-        parsed_input = Text.from_ansi(args.input.read())
-
-    elif args.demo:
-        console = Console(file=io.StringIO(), record=True, force_terminal=True)
+    if args.demo:
+        console = Console(
+            file=io.StringIO(),
+            record=True,
+            force_terminal=True,
+            color_system="truecolor",
+            legacy_windows=False,
+        )
         parsed_input = make_test_card()  # type: ignore
+
+    elif args.input:
+        parsed_input = Text.from_ansi(args.input.read())
 
     title = args.title or cmd or "yartsu"
 

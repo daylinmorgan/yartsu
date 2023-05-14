@@ -4,32 +4,26 @@ THEME_MD="./docs/themes.md"
 
 themes=$(yartsu --list-themes | tail -n +5 | cut -d' ' -f 3)
 
-newline() {
-	echo >>"$THEME_MD"
-}
-
 mkdir -p ./docs/themes
 rm -f ./docs/themes/*
 rm -f $THEME_MD
+yartsu -o docs/themes/list.svg -- yartsu --list-themes
 
-echo '<div id="top"></div>' >>$THEME_MD
-newline
-echo "# Themes" >>$THEME_MD
-newline
+cat >>"$THEME_MD" <<EOF
+# Themes
 
-printf "Available themes:\n\n" >>$THEME_MD
+<p align='center'>
+<img src="/yartsu/themes/list.svg" width="50%">
+</p>
 
-for theme in $themes; do
-	echo "- [$theme](#${theme//_//})" >>$THEME_MD
-done
-newline
+See below for example outputs of each.
+EOF
 
 for theme in $themes; do
 	url="docs/themes/${theme}.svg"
 	cat >>"$THEME_MD" <<EOF
-## $theme
-![$theme](./themes/${theme}.svg)
-<p align="right">(<a href="#top">back to top</a>)</p>
+=== "$theme"
+    ![$theme](./themes/${theme}.svg)
 EOF
 	yartsu --theme "$theme" -o "$url" --demo -t "yartsu --theme ${theme} --demo"
 done
