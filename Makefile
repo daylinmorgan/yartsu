@@ -55,6 +55,7 @@ docs-logos:
 
 clean: ## cleanup build and loose files
 	@rm -rf build dist capture.svg
+	@rm docs/themes/*.svg -f
 
 # conditionals
 check-tag:
