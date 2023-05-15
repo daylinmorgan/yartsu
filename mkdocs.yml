@@ -8,6 +8,8 @@ repo_name: daylinmorgan/yartsu
 
 theme:
   name: material
+  logo: images/logo-minimal.png
+  favicon: images/logo-minimal.png
   features:
     - navigation.indexes
   palette:
