@@ -47,9 +47,17 @@ docs-theme:
 docs/rich-diff.md:
 	@./scripts/rich-diff > $@
 
-docs-logos:
-	@lolcat -F .5 -S 9 -f assets/logo.txt | yartsu -o assets/logo.svg
-	@yartsu -o assets/help.svg -t "yartsu --help" -- yartsu -h
+.PHONY: docs-logos
+docs-logos: assets/logo.svg assets/logo-minimal.svg
+
+assets/logo.svg: assets/logo.txt
+	@lolcat -F .5 -S 9 -f $< | yartsu -o $@ 
+
+assets/logo-minimal.svg: assets/logo-minimal.txt
+	@lolcat -F .5 -S 9 -f $< | yartsu -o $@ -w "$(shell wc -L $< | awk '{print $$1}')" -t ' '
+
+assets/help.svg:
+	@yartsu -o $@ -t "yartsu --help" -- yartsu -h
 
 clean: ## cleanup build and loose files
 	@rm -rf build dist capture.svg
