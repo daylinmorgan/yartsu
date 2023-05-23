@@ -1,4 +1,5 @@
 import io
+import platform
 import sys
 import textwrap
 from argparse import SUPPRESS, FileType
@@ -9,7 +10,6 @@ from rich.text import Text
 
 from ._argparse import ArgumentParser
 from ._export_format import CONSOLE_SVG_FORMAT
-from ._run_cmd import run_cmd
 from ._version import __version__
 from .console import Console
 from .term import term
@@ -101,6 +101,10 @@ def main() -> None:
 
     elif args.cmd:
         cmd = " ".join(args.cmd)
+        if platform.system() == "windows":
+            term.print("[CmdError]: cmd mode is not supported on Windows", err=True)
+            sys.exit(1)
+        from ._run_cmd import run_cmd
 
         try:
             returncode, captured_output = run_cmd(cmd)
