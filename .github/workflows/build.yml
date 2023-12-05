@@ -1,0 +1,58 @@
+name: ⚙️ Build Binaries
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  APP_NAME: yartsu
+  RELEASE_FILES: README.md
+
+jobs:
+  build-artifact:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+        # - windows-latest # broken
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
+      - name: Install Pyoxidizer 
+        run: pip install pyoxidizer
+
+      - name: Build Binary
+        run: pyoxidizer build --release
+
+      - name: Create Artifact
+        shell: bash
+        run: |
+          assets="${{ env.APP_NAME }}_$(echo "${{ runner.os }}" | tr '[:upper:]' '[:lower:]')"
+          echo "$assets"
+          mkdir -p "dist/$assets"
+          cp -r build/**/release/install/${{ env.APP_NAME }}/* "dist/$assets/"
+          cp -r ${{ env.RELEASE_FILES }} "dist/$assets/"
+          (
+            cd dist
+            if [[ "${{ runner.os }}" == Windows ]]; then
+              7z a "$assets.zip" "$assets"
+            else
+              tar czf "$assets.tar.gz" "$assets"
+            fi
+            ls -lah *.*
+          )
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact-${{ matrix.os }}
+          path: |
+            dist/*.tar.gz
+            dist/*.zip
+
